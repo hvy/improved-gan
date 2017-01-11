@@ -19,7 +19,7 @@ MODEL_DIR = '/tmp/imagenet'
 DATA_URL = 'http://download.tensorflow.org/models/image/imagenet/inception-2015-12-05.tgz'
 softmax = None
 
-# Call this function with list of images. Each of elements should be a 
+# Call this function with list of images. Each of elements should be a
 # numpy array with values ranging from 0 to 255.
 def get_inception_score(images, splits=10):
   assert(type(images) == list)
@@ -73,6 +73,10 @@ def _init_inception():
     graph_def = tf.GraphDef()
     graph_def.ParseFromString(f.read())
     _ = tf.import_graph_def(graph_def, name='')
+
+  # Write graph to file so that it can be visualized using TensorBoard
+  # summary_writer = tf.summary.FileWriter('data', graph=graph_def)
+
   # Works with an arbitrary minibatch size.
   with tf.Session() as sess:
     pool3 = sess.graph.get_tensor_by_name('pool_3:0')
