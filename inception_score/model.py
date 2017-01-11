@@ -75,7 +75,7 @@ def _init_inception():
     _ = tf.import_graph_def(graph_def, name='')
 
   # Write graph to file so that it can be visualized using TensorBoard
-  # summary_writer = tf.summary.FileWriter('data', graph=graph_def)
+  summary_writer = tf.summary.FileWriter('data', graph=graph_def)
 
   # Works with an arbitrary minibatch size.
   with tf.Session() as sess:
